@@ -3,9 +3,22 @@
   "type": "module",
   "private": true,
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "cheerio": "^1.1.2",
+    "gray-matter": "^4.0.3",
+    "typesense": "^2.1.0",
+    "vitepress": "^2.0.0-alpha.15"
   },
   "peerDependencies": {
     "typescript": "^5"
+  },
+  "scripts": {
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
+  },
+  "dependencies": {
+    "typesense-docsearch-css": "^0.4.1",
+    "typesense-docsearch.js": "^3.4.1"
   }
 }

@@ -83,6 +83,10 @@ export function TypesenseSearchPlugin(options: DocSearchClientParams): Plugin {
           alias: {
             './VPNavBarSearch.vue': new URL('./Search.vue', import.meta.url)
               .pathname,
+            './VPNavBarSearchButton.vue': new URL(
+              './SearchButton.vue',
+              import.meta.url
+            ).pathname,
           },
         },
       };

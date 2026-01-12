@@ -1,0 +1,63 @@
+# Styling
+
+Create this file `.vitepress/theme/custom.css` with the following content:
+
+```css
+[class*='DocSearch'] {
+  /* Layout & Dimensions */
+  --docsearch-actions-height: auto;
+  --docsearch-actions-width: auto;
+
+  /* Backgrounds */
+  --docsearch-container-background: var(
+    --vp-backdrop-bg-color
+  ); /* The overlay backdrop */
+  --docsearch-modal-background: var(--vp-c-bg-soft);
+  --docsearch-footer-background: var(--vp-c-bg);
+  --docsearch-background-color: var(--vp-c-bg-soft);
+
+  /* Search Button & Modal Search Input */
+  --docsearch-search-button-background: var(--vp-c-bg-alt);
+  --docsearch-searchbox-focus-background: transparent;
+  --docsearch-highlight-color: var(--vp-c-brand-1);
+  --docsearch-searchbox-shadow: inset 0 0 0 2px var(--vp-c-brand-1);
+
+  /* Text & Branding */
+  --docsearch-primary-color: var(--vp-c-brand-1);
+  --docsearch-focus-color: var(--vp-c-brand-1);
+  --docsearch-text-color: var(--vp-c-text-1);
+  --docsearch-secondary-text-color: var(--vp-c-text-2);
+  --docsearch-muted-color: var(--vp-c-text-2);
+  --docsearch-icon-color: var(--vp-c-text-2);
+  --docsearch-subtle-color: var(--vp-c-divider);
+
+  /* Hits (Results) */
+  --docsearch-hit-background: var(--vp-c-default-soft);
+  --docsearch-text-color: var(--vp-c-text-1);
+  --docsearch-hit-highlight-color: var(--vp-c-brand-soft);
+  --docsearch-hit-active-color: var(--vp-c-text-1);
+
+  /* Success / Soft colors */
+  --docsearch-success-color: var(--vp-c-brand-soft);
+  --docsearch-soft-primary-color: var(--vp-c-brand-soft);
+
+  /* Keyboard Shortcuts */
+  --docsearch-key-background: transparent;
+  --docsearch-key-color: var(--vp-c-text-2);
+
+  --docsearch-hit-shadow: none;
+  --docsearch-key-shadow: none;
+  --docsearch-footer-shadow: 0 -1px 0 0 var(--vp-c-divider);
+}
+```
+
+And import it in `.vitepress/theme/index.ts`:
+
+```ts{2}
+import DefaultTheme from 'vitepress/theme';
+import './custom.css';
+
+export default {
+  extends: DefaultTheme,
+};
+```

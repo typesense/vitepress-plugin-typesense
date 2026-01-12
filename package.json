@@ -1,16 +1,10 @@
 {
-  "name": "vitepress-plugin-typesense",
+  "name": "vitepress-plugin-typesense-monorepo",
   "type": "module",
+  "version": "0.0.1",
   "private": true,
-  "devDependencies": {
-    "@types/bun": "latest",
-    "cheerio": "^1.1.2",
-    "gray-matter": "^4.0.3",
-    "typesense": "^2.1.0",
-    "vitepress": "^2.0.0-alpha.15"
-  },
-  "peerDependencies": {
-    "typescript": "^5"
+  "engines": {
+    "node": "^18.17.1 || ^20.3.0 || >=21.0.0"
   },
   "scripts": {
     "docs:dev": "vitepress dev docs",
@@ -18,7 +12,12 @@
     "docs:preview": "vitepress preview docs"
   },
   "dependencies": {
-    "typesense-docsearch-css": "^0.4.1",
-    "typesense-docsearch.js": "^3.4.1"
-  }
+    "vitepress-plugin-typesense": "workspace:*"
+  },
+  "devDependencies": {
+    "vitepress": "^2.0.0-alpha.15"
+  },
+  "workspaces": [
+    "packages/*"
+  ]
 }

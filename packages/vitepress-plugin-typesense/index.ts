@@ -1,20 +1,24 @@
 import type { Plugin } from 'vite';
-import path from 'path';
 import fs from 'fs';
 import matter from 'gray-matter';
 import type docsearch from 'typesense-docsearch.js';
 import type { SiteConfig } from 'vitepress';
-import { TypesenseHelper } from './typesenseHelper';
-import { IndexingStrategy } from './indexingStrategy';
+import { TypesenseHelper } from './typesenseHelper.js';
+import { IndexingStrategy } from './indexingStrategy.js';
+import type { CustomSettings } from './types';
+import path from 'path';
 
 const VIRTUAL_MODULE_ID = 'virtual:typesense-config';
 const RESOLVED_VIRTUAL_ID = '\0' + VIRTUAL_MODULE_ID;
 
-export type DocSearchClientParams = Omit<
-  Parameters<typeof docsearch>[0],
-  'container' | 'translations'
-> &
-  DocSearchLocales &
+export type DocSearchClientConfig =
+  | Omit<Parameters<typeof docsearch>[0], 'container' | 'translations'> &
+      DocSearchLocales;
+
+export type TypesensePluginConfig = (
+  | DocSearchClientConfig
+  | { configFilePath: string }
+) &
   IndexingConfig;
 
 type DocSearchLocales = {
@@ -25,28 +29,47 @@ type DocSearchLocales = {
 
 type IndexingConfig = {
   indexing?: {
+    typesenseCollectionName?: string;
     enabled: boolean;
     hostname: string;
     typesenseServerConfig: Parameters<
       typeof docsearch
     >[0]['typesenseServerConfig'];
+    customCollectionSettings?: CustomSettings;
     failBuildOnDocumentIndexingError?: boolean;
   };
 };
+let vitepressConfigDir: string;
 
-export function TypesenseSearchPlugin(options: DocSearchClientParams): Plugin {
+export function TypesenseSearchPlugin(options: TypesensePluginConfig): Plugin {
   let hasIndexed = false;
 
   return {
     name: 'vitepress-plugin-typesense',
 
     configResolved(config: any) {
+      vitepressConfigDir = config.root;
+
       if (!options.indexing?.enabled) return;
+
+      if (
+        'configFilePath' in options &&
+        !options.indexing.typesenseCollectionName
+      )
+        return console.error(
+          '`indexing.typesenseCollectionName` must be set when using `configFilePath`'
+        );
+
       const vitepressConfig: SiteConfig = config.vitepress;
 
       if (!vitepressConfig) {
         return;
       }
+
+      const collectionName =
+        'configFilePath' in options
+          ? options.indexing.typesenseCollectionName!
+          : options.typesenseCollectionName;
 
       const previousBuildEnd = vitepressConfig.buildEnd;
 
@@ -57,11 +80,7 @@ export function TypesenseSearchPlugin(options: DocSearchClientParams): Plugin {
 
         if (!hasIndexed) {
           hasIndexed = true;
-          await buildEnd(
-            siteConfig,
-            options.typesenseCollectionName,
-            options.indexing
-          );
+          await buildEnd(siteConfig, collectionName, options.indexing);
         }
       };
     },
@@ -73,7 +92,20 @@ export function TypesenseSearchPlugin(options: DocSearchClientParams): Plugin {
     load(id) {
       if (id === RESOLVED_VIRTUAL_ID) {
         const { indexing, ...rest } = options;
-        return `export default ${JSON.stringify(rest)}`;
+
+        if ('configFilePath' in rest) {
+          const normalizePath = (filePath: string) => {
+            const absolutePath = path.isAbsolute(filePath)
+              ? filePath
+              : path.resolve(vitepressConfigDir, filePath);
+            return JSON.stringify(absolutePath);
+          };
+
+          return `export { default } from ${normalizePath(
+            rest.configFilePath
+          )};`;
+        }
+        return `export default ${JSON.stringify(rest)};`;
       }
     },
 
@@ -110,7 +142,7 @@ async function buildEnd(
     options.typesenseServerConfig,
     typesenseCollectionAlias,
     collectionNameTmp,
-    null
+    options.customCollectionSettings || null
   );
   const strategy = new IndexingStrategy();
 

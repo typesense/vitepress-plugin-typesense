@@ -2,7 +2,7 @@
 import { ref, onMounted, onUnmounted, nextTick, watch, computed } from 'vue';
 import { useData } from 'vitepress';
 import SearchButton from './SearchButton.vue';
-import type { DocSearchClientParams } from '.';
+import type { DocSearchClientConfig } from '.';
 // @ts-ignore
 import config from 'virtual:typesense-config';
 // @ts-ignore
@@ -37,8 +37,9 @@ const load = async () => {
 const initializeDocSearch = async (currentLang: string) => {
   // @ts-ignore
   const docsearch = await import('typesense-docsearch.js/dist/umd');
-  const { locales, ...rest }: DocSearchClientParams = config;
+  const { locales, ...rest }: DocSearchClientConfig = config;
 
+  console.log(config);
   docsearch.default(
     Object.assign({}, rest, {
       container: '#typesense-search',
@@ -176,6 +177,12 @@ watch(
   color: var(--docsearch-key-color);
 }
 
+.DocSearch-Commands-Key {
+  background: none !important;
+  border: 1px solid var(--docsearch-subtle-color) !important;
+  border-radius: 4px !important;
+}
+
 .DocSearch-Button-Keys > * {
   display: none !important;
 }
@@ -191,5 +198,9 @@ watch(
 .DocSearch-Logo a {
   display: flex;
   align-items: center;
+}
+
+.DocSearch-Help a {
+  color: var(--docsearch-highlight-color);
 }
 </style>

@@ -1,0 +1,22 @@
+{
+  "index_name": "YOUR_TYPESENSE_COLLECTION_NAME",
+  "start_urls": [
+    {
+      "url": "YOUR_DOCUMENTATION_SITE_URL"
+    }
+  ],
+  "selectors": {
+    "default": {
+      "lvl0": ".VPNavBarTitle",
+      "lvl1": ".vp-doc h1",
+      "lvl2": ".vp-doc h2",
+      "lvl3": ".vp-doc h3",
+      "lvl4": ".vp-doc h4",
+      "lvl5": ".vp-doc h5",
+      "lvl6": ".vp-doc h6",
+      "text": ".vp-doc p, .vp-doc ul li, .vp-doc ol li, .vp-doc table tbody tr"
+    }
+  },
+  "strip_chars": " .,;:#",
+  "scrape_start_urls": false
+}

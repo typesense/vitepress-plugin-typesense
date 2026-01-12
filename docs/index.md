@@ -3,23 +3,25 @@
 layout: home
 
 hero:
-  name: "VitePress plugin Typesense"
-  text: "VitePress plugin Typesense"
-  tagline: My great project tagline
+  name: 'VitePress'
+  text: 'Plugin Typesense'
+  tagline: Add DocSearch powered by Typesense into your VitePress site for fast, typo-tolerant documentation search.
+  image:
+    src: /logo.svg
+    alt: VitePress
   actions:
     - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
-    - theme: alt
-      text: API Examples
-      link: /api-examples
+      text: Get started
+      link: /getting-started
 
 features:
-  - title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+  - icon: 🚀
+    title: Simple to setup
+    details: Get powerful search features into your documentation site in no time!
+  - icon: 📄
+    title: Index on build
+    details: Automatically sync your documentation with Typesense for seamless search experience.
+  - icon: 🛠️
+    title: Lazy loading
+    details: Loading the DocSearch component only when the user need, saving time and bandwidth.
 ---
-

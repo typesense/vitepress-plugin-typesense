@@ -1,0 +1,25 @@
+{
+  "name": "vitepress-plugin-typesense",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "exports": {
+    ".": "./index.ts",
+    "./Search.vue": "./Search.vue",
+    "./SearchButton.vue": "./SearchButton.vue"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "cheerio": "^1.1.2",
+    "gray-matter": "^4.0.3",
+    "typesense": "^2.1.0",
+    "vitepress": "^2.0.0-alpha.15"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "typesense-docsearch-css": "^0.4.1",
+    "typesense-docsearch.js": "^3.4.1"
+  }
+}

@@ -1,5 +1,7 @@
 {
   "name": "vitepress-plugin-typesense",
+  "description": "A VitePress plugin that adds Typesense DocSearch for fast, typo-tolerant documentation search.",
+  "author": "typesense",
   "type": "module",
   "version": "1.0.0",
   "private": true,
@@ -8,6 +10,14 @@
     "./Search.vue": "./Search.vue",
     "./SearchButton.vue": "./SearchButton.vue"
   },
+  "files": [
+    "index.ts",
+    "indexingStrategy.ts",
+    "types.ts",
+    "typesenseHelper.ts",
+    "Search.vue",
+    "SearchButton.vue"
+  ],
   "devDependencies": {
     "@types/bun": "latest",
     "cheerio": "^1.1.2",
@@ -21,5 +31,12 @@
   "dependencies": {
     "typesense-docsearch-css": "^0.4.1",
     "typesense-docsearch.js": "^3.4.1"
-  }
+  },
+  "homepage": "https://github.com/typesense/vitepress-plugin-typesense",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/typesense/vitepress-plugin-typesense.git",
+    "directory": "packages/vitepress-plugin-typesense"
+  },
+  "bugs": "https://github.com/typesense/vitepress-plugin-typesense/issues"
 }

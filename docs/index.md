@@ -5,7 +5,7 @@ layout: home
 hero:
   name: 'VitePress'
   text: 'Plugin Typesense'
-  tagline: Add DocSearch powered by Typesense into your VitePress site for fast, typo-tolerant documentation search.
+  tagline: Add Typesense DocSearch into your VitePress site for fast, typo-tolerant documentation search.
   image:
     src: /logo.svg
     alt: VitePress
@@ -16,12 +16,12 @@ hero:
 
 features:
   - icon: 🚀
-    title: Simple to setup
-    details: Get powerful search features into your documentation site in no time!
+    title: Instant Integration
+    details: Get powerful search features into your documentation site in minutes!
   - icon: 📄
-    title: Index on build
-    details: Automatically sync your documentation with Typesense for seamless search experience.
+    title: Seamless Build Integration
+    details: Automatically sync your content with Typesense during every build for seamless search experience.
   - icon: 🛠️
-    title: Lazy loading
-    details: Loading the DocSearch component only when the user need, saving time and bandwidth.
+    title: Optimized Performance
+    details: Built with lazy loading to ensure your documentation stays lightning-fast while saving user bandwidth.
 ---

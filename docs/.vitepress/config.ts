@@ -9,24 +9,11 @@ export default defineConfig({
   description: 'VitePress plugin Typesense',
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
-    nav: [
-      { text: 'Home', link: '/' },
-      { text: 'Getting started', link: '/getting-started' },
-    ],
-
-    sidebar: [
-      {
-        text: 'Reference',
-        items: [
-          { text: 'Getting started', link: '/getting-started' },
-          { text: 'Configuration', link: '/configuration' },
-          { text: 'Styling', link: '/styling' },
-        ],
-      },
-    ],
-
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/vuejs/vitepress' },
+      {
+        icon: 'github',
+        link: 'https://github.com/typesense/vitepress-plugin-typesense',
+      },
     ],
   },
 
@@ -34,10 +21,42 @@ export default defineConfig({
     root: {
       label: 'English',
       lang: 'en',
+      themeConfig: {
+        nav: [
+          { text: 'Home', link: '/' },
+          { text: 'Getting started', link: '/getting-started' },
+        ],
+        sidebar: [
+          {
+            text: 'Reference',
+            items: [
+              { text: 'Getting started', link: '/getting-started' },
+              { text: 'Configuration', link: '/configuration' },
+              { text: 'Styling', link: '/styling' },
+            ],
+          },
+        ],
+      },
     },
     vi: {
       label: 'Vietnamese',
-      lang: 'vi', // optional, will be added  as `lang` attribute on `html` tag
+      lang: 'vi',
+      themeConfig: {
+        nav: [
+          { text: 'Trang chủ', link: '/vi' },
+          { text: 'Bắt đầu', link: '/vi/getting-started' },
+        ],
+        sidebar: [
+          {
+            text: 'Tham khảo',
+            items: [
+              { text: 'Bắt đầu', link: '/vi/getting-started' },
+              { text: 'Cấu hình', link: '/vi/configuration' },
+              { text: 'Giao diện', link: '/vi/styling' },
+            ],
+          },
+        ],
+      },
     },
   },
   cleanUrls: true,

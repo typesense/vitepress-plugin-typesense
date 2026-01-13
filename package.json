@@ -1,5 +1,7 @@
 {
   "name": "vitepress-plugin-typesense-monorepo",
+  "description": "A VitePress plugin that adds Typesense DocSearch for fast, typo-tolerant documentation search.",
+  "author": "typesense",
   "type": "module",
   "version": "0.0.1",
   "private": true,
@@ -19,5 +21,11 @@
   },
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "homepage": "https://github.com/typesense/vitepress-plugin-typesense",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/typesense/vitepress-plugin-typesense.git"
+  },
+  "bugs": "https://github.com/typesense/vitepress-plugin-typesense/issues"
 }

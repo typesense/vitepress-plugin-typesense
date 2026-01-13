@@ -3,8 +3,8 @@ import fs from 'fs';
 import matter from 'gray-matter';
 import type docsearch from 'typesense-docsearch.js';
 import type { SiteConfig } from 'vitepress';
-import { TypesenseHelper } from './typesenseHelper.js';
-import { IndexingStrategy } from './indexingStrategy.js';
+import { TypesenseHelper } from './typesenseHelper.ts';
+import { IndexingStrategy } from './indexingStrategy.ts';
 import type { CustomSettings } from './types';
 import path from 'path';
 

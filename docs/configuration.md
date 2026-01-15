@@ -69,7 +69,7 @@ Here are the types for configuring documents indexing on build:
 type IndexingConfig = {
   indexing?: {
     enabled: boolean;
-    hostname: string; // your VitePress site hostname used to construct links to your docs pages
+    hostname?: string; // your VitePress site hostname used to construct links to your docs pages
     typesenseServerConfig: {
       /* server config*/
       /* The api key used here must have write permission*/

@@ -31,7 +31,7 @@ type IndexingConfig = {
   indexing?: {
     typesenseCollectionName?: string;
     enabled: boolean;
-    hostname: string;
+    hostname?: string;
     typesenseServerConfig: Parameters<
       typeof docsearch
     >[0]['typesenseServerConfig'];
@@ -208,7 +208,7 @@ async function buildEnd(
     }
     // Upload & Commit
     console.log(`⚡ [Typesense] Uploading ${allRecords.length} records...`);
-    await helper.addRecords(allRecords, options.hostname, false);
+    await helper.addRecords(allRecords, options.hostname || '', false);
     await helper.commitTmpCollection();
 
     console.log('✅ [Typesense] Indexing Complete.');

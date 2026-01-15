@@ -69,7 +69,7 @@ Dưới đây là các kiểu dữ liệu (types) để cấu hình việc lập
 type IndexingConfig = {
   indexing?: {
     enabled: boolean;
-    hostname: string; // hostname trang VitePress của bạn, được dùng để tạo liên kết đến các trang tài liệu
+    hostname?: string; // hostname trang VitePress của bạn, được dùng để tạo liên kết đến các trang tài liệu
     typesenseServerConfig: {
       /* cấu hình server */
       /* Api key được sử dụng ở đây phải có quyền ghi (write permission) */

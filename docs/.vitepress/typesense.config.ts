@@ -1,15 +1,33 @@
 import { DocSearchClientConfig } from 'vitepress-plugin-typesense';
+import { loadEnv } from 'vitepress';
+
+export const COLLECTION_NAME = 'vitepress-plugin-typesense';
+const env = loadEnv('production', process.cwd(), '');
 
 export default {
-  typesenseCollectionName: 'vitepress-docs',
+  typesenseCollectionName: COLLECTION_NAME,
   typesenseServerConfig: {
-    apiKey: 'xyz',
-    nodes: [{ url: 'http://localhost:8108' }],
+    nodes: env.PUBLIC_TYPESENSE_URLS
+      ? env.PUBLIC_TYPESENSE_URLS.split(',').map((url: string) => ({
+          url,
+        }))
+      : [
+          {
+            url: 'http://localhost:8108',
+          },
+        ],
+
+    nearestNode: {
+      url: env.PUBLIC_TYPESENSE_NEAREST_NODE_URL || 'http://localhost:8108',
+    },
+    apiKey: env.PUBLIC_TYPESENSE_SEARCH_ONLY_API_KEY || 'xyz',
   },
   typesenseSearchParameters: {},
+
   getMissingResultsUrl({ query }) {
-    return `https://example.com/?query=${query}`;
+    return `https://github.com/typesense/typesense-docsearch.js/issues/new?title=${query}`;
   },
+
   locales: {
     vi: {
       button: {

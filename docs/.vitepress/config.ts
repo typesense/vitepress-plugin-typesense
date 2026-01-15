@@ -1,5 +1,6 @@
 import { defineConfig, loadEnv } from 'vitepress';
 import { TypesenseSearchPlugin } from 'vitepress-plugin-typesense';
+import { COLLECTION_NAME } from './typesense.config';
 
 const env = loadEnv('production', process.cwd(), '');
 
@@ -65,12 +66,11 @@ export default defineConfig({
       TypesenseSearchPlugin({
         configFilePath: '.vitepress/typesense.config.ts',
         indexing: {
-          typesenseCollectionName: 'vitepress-docs',
+          typesenseCollectionName: COLLECTION_NAME,
           enabled: true,
-          hostname: 'http://localhost:5173',
           typesenseServerConfig: {
             apiKey: env.TYPESENSE_ADMIN_API_KEY,
-            nodes: [{ url: 'http://localhost:8108' }],
+            nodes: [{ url: env.PUBLIC_TYPESENSE_NEAREST_NODE_URL }],
           },
         },
       }),

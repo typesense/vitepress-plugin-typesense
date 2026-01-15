@@ -17,6 +17,7 @@
     "vitepress-plugin-typesense": "workspace:*"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.29.8",
     "vitepress": "^2.0.0-alpha.15"
   },
   "workspaces": [

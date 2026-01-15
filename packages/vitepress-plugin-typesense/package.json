@@ -4,7 +4,9 @@
   "author": "typesense",
   "type": "module",
   "version": "1.0.0",
-  "private": true,
+  "publishConfig": {
+    "access": "public"
+  },
   "exports": {
     ".": "./index.ts",
     "./Search.vue": "./Search.vue",

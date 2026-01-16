@@ -6,7 +6,7 @@
   "version": "0.0.1",
   "private": true,
   "engines": {
-    "node": "^18.17.1 || ^20.3.0 || >=21.0.0"
+    "node": "^20.3.0 || >=21.0.0"
   },
   "scripts": {
     "docs:dev": "vitepress dev docs",

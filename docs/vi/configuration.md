@@ -16,16 +16,18 @@ Nếu bạn muốn truyền các tùy chọn dạng hàm như `transformItems()`
 // typesense.config.ts
 import { DocSearchClientConfig } from 'vitepress-plugin-typesense';
 
-export default {
-  typesenseCollectionName: 'COLLECTION_NAME',
-  typesenseServerConfig: {
-    /* CẤU HÌNH CỦA BẠN */
-  },
-  typesenseSearchParameters: {},
-  getMissingResultsUrl({ query }) {
-    return `https://example.com/?query=${query}`;
-  },
-} satisfies DocSearchClientConfig;
+export default () =>
+  ({
+    typesenseCollectionName: 'COLLECTION_NAME',
+    typesenseServerConfig: {
+      /* CẤU HÌNH CỦA BẠN */
+      /* Có thể dùng import.meta.env để truy cập các public env variables */
+    },
+    typesenseSearchParameters: {},
+    getMissingResultsUrl({ query }) {
+      return `https://example.com/?query=${query}`;
+    },
+  } satisfies DocSearchClientConfig);
 ```
 
 Sau đó chỉ định đường dẫn tệp (tương đối so với thư mục gốc) trong cấu hình plugin:

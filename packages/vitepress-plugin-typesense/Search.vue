@@ -37,9 +37,8 @@ const load = async () => {
 const initializeDocSearch = async (currentLang: string) => {
   // @ts-ignore
   const docsearch = await import('typesense-docsearch.js/dist/umd');
-  const { locales, ...rest }: DocSearchClientConfig = config;
+  const { locales, ...rest }: DocSearchClientConfig = config();
 
-  console.log(config);
   docsearch.default(
     Object.assign({}, rest, {
       container: '#typesense-search',

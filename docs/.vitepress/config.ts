@@ -69,8 +69,15 @@ export default defineConfig({
           typesenseCollectionName: COLLECTION_NAME,
           enabled: true,
           typesenseServerConfig: {
-            apiKey: env.TYPESENSE_ADMIN_API_KEY,
-            nodes: [{ url: env.PUBLIC_TYPESENSE_NEAREST_NODE_URL }],
+            apiKey: env.TYPESENSE_ADMIN_API_KEY || 'xyz',
+            nodes: [
+              {
+                url:
+                  env.VITE_PUBLIC_TYPESENSE_NEAREST_NODE_URL ||
+                  'http://localhost:8108',
+              },
+            ],
+            logLevel: 'DEBUG',
           },
         },
       }),

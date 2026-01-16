@@ -16,16 +16,18 @@ If you want to pass function options like `transformItems()` or `getMissingResul
 // typesense.config.ts
 import { DocSearchClientConfig } from 'vitepress-plugin-typesense';
 
-export default {
-  typesenseCollectionName: 'COLLECTION_NAME',
-  typesenseServerConfig: {
-    /* YOUR CONFIG */
-  },
-  typesenseSearchParameters: {},
-  getMissingResultsUrl({ query }) {
-    return `https://example.com/?query=${query}`;
-  },
-} satisfies DocSearchClientConfig;
+export default () =>
+  ({
+    typesenseCollectionName: 'COLLECTION_NAME',
+    typesenseServerConfig: {
+      /* YOUR CONFIG */
+      /* You can use import.meta.env to access public env variables */
+    },
+    typesenseSearchParameters: {},
+    getMissingResultsUrl({ query }) {
+      return `https://example.com/?query=${query}`;
+    },
+  } satisfies DocSearchClientConfig);
 ```
 
 Then specify the file path, which is relative to the root directory, in the plugin configuration:

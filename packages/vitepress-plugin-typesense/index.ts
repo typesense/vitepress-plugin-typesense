@@ -213,7 +213,13 @@ async function buildEnd(
 
     console.log('✅ [Typesense] Indexing Complete.');
   } catch (error) {
-    console.error('❌ [Typesense] Indexing Failed:', error);
-    if (options.failBuildOnDocumentIndexingError != false) process.exit(1);
+    console.error('❌ [Typesense] Indexing Failed:');
+    if (options.failBuildOnDocumentIndexingError != false) {
+      process.exitCode = 1;
+      console.log(
+        'failBuildOnDocumentIndexingError is not set to false, exiting build...'
+      );
+      throw error;
+    } else console.log(error);
   }
 }

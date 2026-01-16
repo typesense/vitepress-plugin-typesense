@@ -77,7 +77,6 @@ export default defineConfig({
                   'http://localhost:8108',
               },
             ],
-            logLevel: 'DEBUG',
           },
         },
       }),

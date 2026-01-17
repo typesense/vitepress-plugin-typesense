@@ -7,7 +7,9 @@ const env = loadEnv('', process.cwd() + '/docs', '');
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: 'VitePress plugin Typesense',
-  description: 'VitePress plugin Typesense',
+  description:
+    'A VitePress plugin that integrates Typesense with the DocSearch interface to add lightning-fast, typo-tolerant search to your VitePress documentation site.',
+  head: [['link', { rel: 'icon', href: '/favicon.png' }]],
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     socialLinks: [

@@ -20,7 +20,7 @@ features:
     details: Get powerful search features into your documentation site in minutes!
   - icon: 📄
     title: Seamless Build Integration
-    details: Automatically sync your content with Typesense during every build for seamless search experience.
+    details: Automatically sync your content with Typesense during every build so your search is always up-to-date.
   - icon: 🛠️
     title: Optimized Performance
     details: Built with lazy loading to ensure your documentation stays lightning-fast while saving user bandwidth.

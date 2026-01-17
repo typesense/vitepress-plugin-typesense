@@ -19,7 +19,7 @@ features:
     details: Mang các tính năng tìm kiếm mạnh mẽ vào trang tài liệu của bạn chỉ trong vài phút!
   - icon: 📄
     title: Tích hợp quy trình Build liền mạch
-    details: Tự động đồng bộ nội dung của bạn với Typesense trong mỗi lần build để có trải nghiệm tìm kiếm mượt mà.
+    details: Tự động đồng bộ nội dung của bạn với Typesense trong mỗi lần build để có trải nghiệm tìm kiếm luôn được cập nhật.
   - icon: 🛠️
     title: Hiệu suất được tối ưu hóa
     details: Được xây dựng với tính năng lazy loading để đảm bảo tài liệu của bạn luôn tải nhanh như chớp đồng thời tiết kiệm băng thông cho người dùng.

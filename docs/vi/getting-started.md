@@ -39,7 +39,7 @@ Cấu hình plugin trong tệp `.vitepress/config.ts` của bạn.
 ```ts
 import { defineConfig, loadEnv } from 'vitepress';
 
-const env = loadEnv('production', process.cwd(), '');
+const env = loadEnv('', process.cwd() + '/docs', '');
 
 export default defineConfig({
   vite: {
@@ -56,7 +56,7 @@ export default defineConfig({
           enabled: true,
           hostname: 'YOUR_DOCUMENTATION_SITE_URL',
           typesenseServerConfig: {
-            apiKey: env.TYPESENSE_ADMIN_API_KEY, // api key của bạn với quyền ghi, hãy tạo một tệp .env trong thư mục gốc của bạn
+            apiKey: env.TYPESENSE_ADMIN_API_KEY, // api key của bạn với quyền ghi, hãy tạo một tệp .env trong thư mục /docs của bạn
             nodes: [{ url: 'YOUR_TYPESENSE_URL' }],
             // cấu hình timeout, v.v...
           },

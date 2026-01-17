@@ -10,7 +10,7 @@ export default () =>
         ? import.meta.env.VITE_PUBLIC_TYPESENSE_URLS.split(',').map(
             (url: string) => ({
               url,
-            })
+            }),
           )
         : [
             {

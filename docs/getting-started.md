@@ -39,7 +39,7 @@ Configure the plugin in your `.vitepress/config.ts` file.
 ```ts
 import { defineConfig, loadEnv } from 'vitepress';
 
-const env = loadEnv('production', process.cwd(), '');
+const env = loadEnv('', process.cwd() + '/docs', '');
 
 export default defineConfig({
   vite: {
@@ -56,7 +56,7 @@ export default defineConfig({
           enabled: true,
           hostname: 'YOUR_DOCUMENTATION_SITE_URL',
           typesenseServerConfig: {
-            apiKey: env.TYPESENSE_ADMIN_API_KEY, // your api key with write permission, create a .env file in your root directory
+            apiKey: env.TYPESENSE_ADMIN_API_KEY, // your api key with write permission, create a .env file in your /docs directory
             nodes: [{ url: 'YOUR_TYPESENSE_URL' }],
             // timeout config, etc...
           },

@@ -2,7 +2,7 @@ import { defineConfig, loadEnv } from 'vitepress';
 import { TypesenseSearchPlugin } from 'vitepress-plugin-typesense';
 import { COLLECTION_NAME } from './typesense.config';
 
-const env = loadEnv('production', process.cwd(), '');
+const env = loadEnv('', process.cwd() + '/docs', '');
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({

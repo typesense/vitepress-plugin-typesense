@@ -3,6 +3,7 @@
 Tạo tệp `.vitepress/theme/custom.css` này với nội dung sau:
 
 ```css
+/* Đây là các CSS variables của theme mặc định VitePress, chỉnh sửa chúng nếu bạn muốn */
 [class*='DocSearch'] {
   /* Bố cục & Kích thước */
   --docsearch-actions-height: auto;

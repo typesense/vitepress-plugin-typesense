@@ -3,6 +3,7 @@
 Create this file `.vitepress/theme/custom.css` with the following content:
 
 ```css
+/* These are VitePress default theme CSS variables, replace them if you want to */
 [class*='DocSearch'] {
   /* Layout & Dimensions */
   --docsearch-actions-height: auto;

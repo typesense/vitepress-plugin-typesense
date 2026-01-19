@@ -23,7 +23,8 @@ export class IndexingStrategy {
   public getRecords(
     html: string,
     url: string,
-    frontmatter: any
+    frontmatter: any,
+    lang?: string
   ): DocSearchRecord[] {
     const $ = cheerio.load(html);
     const records: DocSearchRecord[] = [];
@@ -117,6 +118,7 @@ export class IndexingStrategy {
         ),
         type: currentLevel,
         weight: weight,
+        language: lang,
       };
 
       record.objectID = this.getObjectID(record);

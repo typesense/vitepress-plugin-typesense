@@ -57,7 +57,7 @@ export function TypesenseSearchPlugin(options: TypesensePluginConfig): Plugin {
         !options.indexing.typesenseCollectionName
       )
         return console.error(
-          '`indexing.typesenseCollectionName` must be set when using `configFilePath`'
+          '`indexing.typesenseCollectionName` must be set when using `configFilePath`',
         );
 
       const vitepressConfig: SiteConfig = config.vitepress;
@@ -102,7 +102,7 @@ export function TypesenseSearchPlugin(options: TypesensePluginConfig): Plugin {
           };
 
           return `export { default } from ${normalizePath(
-            rest.configFilePath
+            rest.configFilePath,
           )};`;
         }
         return `export default ${JSON.stringify(rest)};`;
@@ -117,7 +117,7 @@ export function TypesenseSearchPlugin(options: TypesensePluginConfig): Plugin {
               .pathname,
             './VPNavBarSearchButton.vue': new URL(
               './SearchButton.vue',
-              import.meta.url
+              import.meta.url,
             ).pathname,
           },
         },
@@ -129,7 +129,7 @@ export function TypesenseSearchPlugin(options: TypesensePluginConfig): Plugin {
 async function buildEnd(
   siteConfig: SiteConfig,
   typesenseCollectionAlias: string,
-  options?: IndexingConfig['indexing']
+  options?: IndexingConfig['indexing'],
 ) {
   if (!options?.enabled) return;
 
@@ -142,7 +142,7 @@ async function buildEnd(
     options.typesenseServerConfig,
     typesenseCollectionAlias,
     collectionNameTmp,
-    options.customCollectionSettings || null
+    options.customCollectionSettings || null,
   );
   const strategy = new IndexingStrategy();
 
@@ -151,7 +151,7 @@ async function buildEnd(
     await helper.createTmpCollection();
 
     const allRecords = [];
-    const { pages, srcDir, outDir, cleanUrls } = siteConfig;
+    const { pages, srcDir, outDir, cleanUrls, site } = siteConfig;
 
     // Iterate over source files to get Metadata
     for (const page of pages) {
@@ -173,7 +173,7 @@ async function buildEnd(
       // Read the compiled HTML
       if (!fs.existsSync(htmlPath)) {
         console.warn(
-          `⚠️ [Typesense] Could not find generated file: ${htmlPath}`
+          `⚠️ [Typesense] Could not find generated file: ${htmlPath}`,
         );
         continue;
       }
@@ -195,14 +195,38 @@ async function buildEnd(
 
       const fullUrl = `${options.hostname}/${publicUrlPath}`.replace(
         /([^:]\/)\/+/g,
-        '$1'
+        '$1',
       ); // clean double slashes
 
+      // Determine language
+      let docLang = 'en';
+      if (site.locales?.root?.lang) {
+        docLang = site.locales.root.lang;
+      } else if (site.lang) {
+        docLang = site.lang;
+      }
+
+      if (site.locales) {
+        // pages are paths like "getting-started.md" or "vi/getting-started.md"
+        const firstSegment = page.split('/')[0];
+
+        // Check if the first directory segment matches a defined locale key (e.g. "vi")
+        // If the file is at the root (e.g. "getting-started.md"), firstSegment is the filename itself,
+        // which won't match a locale key in site.locales.
+        if (
+          firstSegment &&
+          firstSegment !== 'root' &&
+          site.locales[firstSegment]
+        ) {
+          docLang = site.locales[firstSegment]?.lang || firstSegment;
+        }
+      }
       // Scrape
       const pageRecords = strategy.getRecords(
         htmlContent,
         fullUrl,
-        frontmatter
+        frontmatter,
+        docLang,
       );
       allRecords.push(...pageRecords);
     }
@@ -217,7 +241,7 @@ async function buildEnd(
     if (options.failBuildOnDocumentIndexingError != false) {
       process.exitCode = 1;
       console.log(
-        'failBuildOnDocumentIndexingError is not set to false, exiting build...'
+        'failBuildOnDocumentIndexingError is not set to false, exiting build...',
       );
       throw error;
     } else console.log(error);

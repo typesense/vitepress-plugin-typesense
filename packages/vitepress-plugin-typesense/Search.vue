@@ -39,16 +39,20 @@ const initializeDocSearch = async (currentLang: string) => {
   const docsearch = await import('typesense-docsearch.js/dist/umd');
   const { locales, ...rest }: DocSearchClientConfig = config();
 
+  if (rest.typesenseSearchParameters.filter_by) {
+    rest.typesenseSearchParameters.filter_by += `&& language:=${currentLang}`;
+  } else rest.typesenseSearchParameters.filter_by = `language:=${currentLang}`;
+
   docsearch.default(
     Object.assign({}, rest, {
       container: '#typesense-search',
       translations: locales?.[currentLang],
-    })
+    }),
   );
 
   setTimeout(() => {
     const btn = document.querySelector(
-      '#typesense-search .DocSearch-Button'
+      '#typesense-search .DocSearch-Button',
     ) as HTMLElement;
     if (btn) btn.click();
   }, 50);
@@ -89,7 +93,7 @@ watch(
     if (loaded.value) {
       await initializeDocSearch(newLang);
     }
-  }
+  },
 );
 </script>
 

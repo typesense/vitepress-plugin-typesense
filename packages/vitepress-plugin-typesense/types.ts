@@ -27,6 +27,7 @@ export interface DocSearchRecord {
   type: string;
   weight: RecordWeight;
   version?: string | string[];
+  language?: string;
   [key: string]: any; // Allow arbitrary meta fields
 }
 

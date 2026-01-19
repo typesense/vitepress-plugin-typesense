@@ -16,7 +16,7 @@ export class TypesenseHelper {
     config: ConfigurationOptions,
     aliasName: string,
     collectionNameTmp: string,
-    customSettings: CustomSettings | null
+    customSettings: CustomSettings | null,
   ) {
     // Set defaults
     const clientConfig = { ...config };
@@ -35,9 +35,6 @@ export class TypesenseHelper {
     this.customSettings = customSettings;
   }
 
-  /**
-   * Initialize version and create the collection
-   */
   public async init() {
     const debugInfo = await this.typesenseClient.debug.retrieve();
     const version = debugInfo.version;
@@ -56,7 +53,7 @@ export class TypesenseHelper {
     try {
       await this.typesenseClient.collections(this.collectionNameTmp).delete();
     } catch (error: any) {
-      // Ignore ObjectNotFound (404)
+      // Ignore ObjectNotFound
       if (error?.httpStatus !== 404) throw error;
     }
 
@@ -140,10 +137,10 @@ export class TypesenseHelper {
   public async addRecords(
     records: DocSearchRecord[],
     url: string,
-    fromSitemap: boolean
+    fromSitemap: boolean,
   ): Promise<void> {
     const transformedRecords = records.map((r) =>
-      TypesenseHelper.transformRecord(r)
+      TypesenseHelper.transformRecord(r),
     );
     const recordCount = transformedRecords.length;
 
@@ -161,7 +158,7 @@ export class TypesenseHelper {
       if (failedItems.length > 0) {
         console.error(
           'Typesense Import Failed:',
-          JSON.stringify(failedItems, null, 2)
+          JSON.stringify(failedItems, null, 2),
         );
         throw new Error('Failed to import some records');
       }
@@ -169,7 +166,7 @@ export class TypesenseHelper {
 
     const color = fromSitemap ? '96' : '94';
     console.log(
-      `\x1b[${color}m> Typesense DocSearch: \x1b[0m${url}\x1b[93m ${recordCount} records\x1b[0m`
+      `\x1b[${color}m> Typesense DocSearch: \x1b[0m${url}\x1b[93m ${recordCount} records\x1b[0m`,
     );
   }
 

@@ -34,9 +34,14 @@ const load = async () => {
   await initializeDocSearch(lang.value);
 };
 
-const initializeDocSearch = async (currentLang: string) => {
-  // @ts-ignore
-  const docsearch = await import('typesense-docsearch.js/dist/umd');
+const initializeDocSearch = async (
+  currentLang: string,
+  autoOpen: boolean = true,
+) => {
+  const docsearch = (await import(
+    // @ts-ignore
+    'typesense-docsearch.js/dist/umd'
+  )) as typeof import('typesense-docsearch.js');
   const { locales, ...rest }: DocSearchClientConfig = config();
 
   if (rest.typesenseSearchParameters.filter_by) {
@@ -50,12 +55,14 @@ const initializeDocSearch = async (currentLang: string) => {
     }),
   );
 
-  setTimeout(() => {
-    const btn = document.querySelector(
-      '#typesense-search .DocSearch-Button',
-    ) as HTMLElement;
-    if (btn) btn.click();
-  }, 50);
+  if (autoOpen) {
+    setTimeout(() => {
+      const btn = document.querySelector(
+        '#typesense-search .DocSearch-Button',
+      ) as HTMLElement;
+      if (btn) btn.click();
+    }, 50);
+  }
 };
 
 const handleSearchHotKey = (event: KeyboardEvent) => {
@@ -91,7 +98,7 @@ watch(
   () => lang.value,
   async (newLang) => {
     if (loaded.value) {
-      await initializeDocSearch(newLang);
+      await initializeDocSearch(newLang, false);
     }
   },
 );

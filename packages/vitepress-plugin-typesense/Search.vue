@@ -43,6 +43,7 @@ const initializeDocSearch = async (
     'typesense-docsearch.js/dist/umd'
   )) as typeof import('typesense-docsearch.js');
   const { locales, ...rest }: DocSearchClientConfig = config();
+  rest.typesenseSearchParameters ||= {};
 
   if (rest.typesenseSearchParameters.filter_by) {
     rest.typesenseSearchParameters.filter_by += `&& language:=${currentLang}`;
@@ -52,6 +53,7 @@ const initializeDocSearch = async (
     Object.assign({}, rest, {
       container: '#typesense-search',
       translations: locales?.[currentLang],
+      typesenseSearchParameters: rest.typesenseSearchParameters,
     }),
   );
 

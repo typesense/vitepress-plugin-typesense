@@ -7,19 +7,33 @@ import { TypesenseHelper } from './typesenseHelper.ts';
 import { IndexingStrategy } from './indexingStrategy.ts';
 import type { CustomSettings } from './types';
 import path from 'path';
+import { fileURLToPath } from 'url';
 
 const VIRTUAL_MODULE_ID = 'virtual:typesense-config';
 const RESOLVED_VIRTUAL_ID = '\0' + VIRTUAL_MODULE_ID;
 
 export type DocSearchClientConfig =
-  | Omit<Parameters<typeof docsearch>[0], 'container' | 'translations'> &
-      DocSearchLocales;
+  | Omit<
+      Parameters<typeof docsearch>[0],
+      'container' | 'translations' | 'typesenseSearchParameters'
+    > &
+      DocSearchLocales & {
+        typesenseSearchParameters?: Parameters<
+          typeof docsearch
+        >[0]['typesenseSearchParameters'];
+      };
 
-export type TypesensePluginConfig = (
-  | DocSearchClientConfig
-  | { configFilePath: string }
-) &
-  IndexingConfig;
+export type TypesensePluginConfig =
+  | (DocSearchClientConfig & {
+      configFilePath?: never;
+      indexing?: IndexingConfig & {
+        typesenseCollectionName?: never;
+      };
+    })
+  | {
+      configFilePath: string;
+      indexing?: IndexingConfig & { typesenseCollectionName: string };
+    };
 
 type DocSearchLocales = {
   locales?: {
@@ -28,16 +42,13 @@ type DocSearchLocales = {
 };
 
 type IndexingConfig = {
-  indexing?: {
-    typesenseCollectionName?: string;
-    enabled: boolean;
-    hostname?: string;
-    typesenseServerConfig: Parameters<
-      typeof docsearch
-    >[0]['typesenseServerConfig'];
-    customCollectionSettings?: CustomSettings;
-    failBuildOnDocumentIndexingError?: boolean;
-  };
+  enabled: boolean;
+  hostname?: string;
+  typesenseServerConfig: Parameters<
+    typeof docsearch
+  >[0]['typesenseServerConfig'];
+  customCollectionSettings?: CustomSettings;
+  failBuildOnDocumentIndexingError?: boolean;
 };
 let vitepressConfigDir: string;
 
@@ -52,10 +63,7 @@ export function TypesenseSearchPlugin(options: TypesensePluginConfig): Plugin {
 
       if (!options.indexing?.enabled) return;
 
-      if (
-        'configFilePath' in options &&
-        !options.indexing.typesenseCollectionName
-      )
+      if (options.configFilePath && !options.indexing.typesenseCollectionName)
         return console.error(
           '`indexing.typesenseCollectionName` must be set when using `configFilePath`',
         );
@@ -66,10 +74,9 @@ export function TypesenseSearchPlugin(options: TypesensePluginConfig): Plugin {
         return;
       }
 
-      const collectionName =
-        'configFilePath' in options
-          ? options.indexing.typesenseCollectionName!
-          : options.typesenseCollectionName;
+      const collectionName = options.configFilePath
+        ? options.indexing.typesenseCollectionName
+        : (options as DocSearchClientConfig).typesenseCollectionName;
 
       const previousBuildEnd = vitepressConfig.buildEnd;
 
@@ -93,7 +100,7 @@ export function TypesenseSearchPlugin(options: TypesensePluginConfig): Plugin {
       if (id === RESOLVED_VIRTUAL_ID) {
         const { indexing, ...rest } = options;
 
-        if ('configFilePath' in rest) {
+        if (rest.configFilePath) {
           const normalizePath = (filePath: string) => {
             const absolutePath = path.isAbsolute(filePath)
               ? filePath
@@ -105,20 +112,24 @@ export function TypesenseSearchPlugin(options: TypesensePluginConfig): Plugin {
             rest.configFilePath,
           )};`;
         }
-        return `export default ${JSON.stringify(rest)};`;
+        return `export default () => (${JSON.stringify(rest)});`;
       }
     },
 
     config() {
+      // Logic to find the current directory in both ESM and CJS
+      let dir = '';
+      if (typeof __dirname !== 'undefined') {
+        dir = __dirname;
+      } else {
+        dir = path.dirname(fileURLToPath(import.meta.url));
+      }
+
       return {
         resolve: {
           alias: {
-            './VPNavBarSearch.vue': new URL('./Search.vue', import.meta.url)
-              .pathname,
-            './VPNavBarSearchButton.vue': new URL(
-              './SearchButton.vue',
-              import.meta.url,
-            ).pathname,
+            './VPNavBarSearch.vue': path.join(dir, 'Search.vue'),
+            './VPNavBarSearchButton.vue': path.join(dir, 'SearchButton.vue'),
           },
         },
       };
@@ -129,7 +140,7 @@ export function TypesenseSearchPlugin(options: TypesensePluginConfig): Plugin {
 async function buildEnd(
   siteConfig: SiteConfig,
   typesenseCollectionAlias: string,
-  options?: IndexingConfig['indexing'],
+  options?: IndexingConfig,
 ) {
   if (!options?.enabled) return;
 
@@ -193,13 +204,13 @@ async function buildEnd(
         publicUrlPath = publicUrlPath.replace(/index$/, '');
       }
 
-      const fullUrl = `${options.hostname}/${publicUrlPath}`.replace(
+      const fullUrl = `${options.hostname || ''}/${publicUrlPath}`.replace(
         /([^:]\/)\/+/g,
         '$1',
       ); // clean double slashes
 
       // Determine language
-      let docLang = 'en';
+      let docLang = 'en-US';
       if (site.locales?.root?.lang) {
         docLang = site.locales.root.lang;
       } else if (site.lang) {

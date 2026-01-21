@@ -11,7 +11,9 @@
   "scripts": {
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
-    "docs:preview": "vitepress preview docs"
+    "docs:preview": "vitepress preview docs",
+    "plugin:build": "cd packages/vitepress-plugin-typesense && bun run build",
+    "plugin:publish": "cd packages/vitepress-plugin-typesense && npm publish"
   },
   "dependencies": {
     "vitepress-plugin-typesense": "workspace:*"

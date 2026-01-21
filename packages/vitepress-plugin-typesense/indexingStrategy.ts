@@ -24,7 +24,7 @@ export class IndexingStrategy {
     html: string,
     url: string,
     frontmatter: any,
-    lang?: string
+    lang?: string,
   ): DocSearchRecord[] {
     const $ = cheerio.load(html);
     const records: DocSearchRecord[] = [];
@@ -54,6 +54,7 @@ export class IndexingStrategy {
 
     nodes.each((index, element) => {
       const el = $(element);
+      // @ts-ignore need to install domhandler to import type Element
       const tagName = element.tagName.toLowerCase();
       const currentLevel = this.getLevelFromTag(tagName);
 
@@ -114,7 +115,7 @@ export class IndexingStrategy {
         hierarchy: hierarchy as Hierarchy,
         hierarchy_radio: this.getHierarchyRadio(
           hierarchy as Hierarchy,
-          currentLevel
+          currentLevel,
         ),
         type: currentLevel,
         weight: weight,
@@ -152,7 +153,7 @@ export class IndexingStrategy {
   // Returns hierarchy where only the deepest active level is filled.
   private getHierarchyRadio(
     hierarchy: Hierarchy,
-    currentLevel: string
+    currentLevel: string,
   ): Hierarchy {
     const radio = this.generateEmptyHierarchy();
     let isFound = false;

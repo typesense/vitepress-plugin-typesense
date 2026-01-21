@@ -1,5 +1,11 @@
 # vitepress-plugin-typesense
 
+## 1.1.0
+
+### Minor Changes
+
+- use vite library mode to build plugin; fixed undefine hostname and corrected default doclang to be `en-US`
+
 ## 1.0.1
 
 ### Patch Changes

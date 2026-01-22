@@ -1,5 +1,11 @@
 # vitepress-plugin-typesense
 
+## 1.1.3
+
+### Patch Changes
+
+- Add license & package keywords
+
 ## 1.1.2
 
 ### Patch Changes

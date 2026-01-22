@@ -1,5 +1,11 @@
 # vitepress-plugin-typesense
 
+## 1.1.2
+
+### Patch Changes
+
+- update homepage link & readme
+
 ## 1.1.1
 
 ### Patch Changes

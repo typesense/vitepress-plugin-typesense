@@ -30,4 +30,4 @@ To enable search, your documentation content must be indexed into Typesense. You
 
 Licensed under the MIT License, Copyright © Typesense.
 
-See [LICENSE](/LICENSE) for more information.
+See [LICENSE](../../LICENSE) for more information.

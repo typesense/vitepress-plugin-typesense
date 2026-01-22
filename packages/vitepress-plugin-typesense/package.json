@@ -7,6 +7,16 @@
   "publishConfig": {
     "access": "public"
   },
+  "license": "MIT",
+  "keywords": [
+    "typesense",
+    "search",
+    "docsearch",
+    "vitepress",
+    "plugin",
+    "documentation-search",
+    "vitepress-plugin"
+  ],
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",

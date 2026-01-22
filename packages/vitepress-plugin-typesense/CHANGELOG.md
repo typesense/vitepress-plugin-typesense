@@ -1,5 +1,11 @@
 # vitepress-plugin-typesense
 
+## 1.1.1
+
+### Patch Changes
+
+- fix: duplicate vue components in the exported npm package
+
 ## 1.1.0
 
 ### Minor Changes

@@ -14,7 +14,8 @@ If you want to pass function options like `transformItems()` or `getMissingResul
 
 ```ts
 // typesense.config.ts
-import { DocSearchClientConfig } from 'vitepress-plugin-typesense';
+// IMPORTANT: import the type only
+import type { DocSearchClientConfig } from 'vitepress-plugin-typesense';
 
 export default () =>
   ({
@@ -63,33 +64,32 @@ You can view the API reference for the DocSearch component [here](https://docsea
 
 You can either enable indexing on VitePress build and the plugin will do the rest for you or use [Typesense DocSearch Scraper](https://typesense.org/docs/guide/docsearch.html#step-1-set-up-docsearch-scraper).
 
-### Index on build
+### Built-in indexing
 
-Here are the types for configuring documents indexing on build:
+The plugin automatically scans your generated HTML files and indexes them into Typesense whenever you run `vitepress build`. Here are the types for configuring documents indexing on build:
 
 ```ts
 type IndexingConfig = {
-  indexing?: {
-    enabled: boolean;
-    hostname?: string; // your VitePress site hostname used to construct links to your docs pages
-    typesenseServerConfig: {
-      /* server config*/
-      /* The api key used here must have write permission*/
-    };
-    customCollectionSettings?: {
-      token_separators?: string[];
-      symbols_to_index?: string[];
-      field_definitions?: any[];
-      enable_nested_fields?: boolean;
-    };
-    failBuildOnDocumentIndexingError?: boolean; // Default: true
+  enabled: boolean;
+  hostname?: string; // your VitePress site hostname used to construct links to your docs pages
+  typesenseServerConfig: {
+    /* server config*/
+    /* The api key used here must have write permission*/
   };
+  customCollectionSettings?: {
+    token_separators?: string[];
+    symbols_to_index?: string[];
+    field_definitions?: any[];
+    enable_nested_fields?: boolean;
+  };
+  failBuildOnDocumentIndexingError?: boolean; // Default: true
 };
 ```
 
 ### Index using DocSearch Scraper
 
-Here is a template for the docsearch config:
+[`typesense-docsearch-scraper`](https://github.com/typesense/typesense-docsearch-scraper) is a crawler that visits your live documentation, extracts the content and pushes it to Typesense.
+This approach requires an automation pipeline (e.g., GitHub Actions). Here is a template for the DocSearch Scraper config:
 
 ```json
 // docsearch.config.json

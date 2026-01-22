@@ -14,7 +14,8 @@ Nếu bạn muốn truyền các tùy chọn dạng hàm như `transformItems()`
 
 ```ts
 // typesense.config.ts
-import { DocSearchClientConfig } from 'vitepress-plugin-typesense';
+// QUAN TRỌNG: phải import dưới dạng type
+import type { DocSearchClientConfig } from 'vitepress-plugin-typesense';
 
 export default () =>
   ({
@@ -63,33 +64,32 @@ Bạn có thể xem tài liệu tham khảo API cho component DocSearch [tại �
 
 Bạn có thể bật tính năng lập chỉ mục khi build VitePress và plugin sẽ lo phần còn lại, hoặc sử dụng [Typesense DocSearch Scraper](https://typesense.org/docs/guide/docsearch.html#step-1-set-up-docsearch-scraper).
 
-### Lập chỉ mục khi build
+### Tính năng lập chỉ mục tích hợp sẵn
 
-Dưới đây là các kiểu dữ liệu (types) để cấu hình việc lập chỉ mục tài liệu khi build:
+Plugin sẽ tự động quét các tệp HTML đã được tạo và lập chỉ mục chúng vào Typesense mỗi khi bạn chạy lệnh vitepress build. Dưới đây là các kiểu dữ liệu (types) để cấu hình việc lập chỉ mục tài liệu khi build:
 
 ```ts
 type IndexingConfig = {
-  indexing?: {
-    enabled: boolean;
-    hostname?: string; // hostname trang VitePress của bạn, được dùng để tạo liên kết đến các trang tài liệu
-    typesenseServerConfig: {
-      /* cấu hình server */
-      /* Api key được sử dụng ở đây phải có quyền ghi (write permission) */
-    };
-    customCollectionSettings?: {
-      token_separators?: string[];
-      symbols_to_index?: string[];
-      field_definitions?: any[];
-      enable_nested_fields?: boolean;
-    };
-    failBuildOnDocumentIndexingError?: boolean; // Mặc định: true
+  enabled: boolean;
+  hostname?: string; // hostname trang VitePress của bạn, được dùng để tạo liên kết đến các trang tài liệu
+  typesenseServerConfig: {
+    /* cấu hình server */
+    /* Api key được sử dụng ở đây phải có quyền ghi (write permission) */
   };
+  customCollectionSettings?: {
+    token_separators?: string[];
+    symbols_to_index?: string[];
+    field_definitions?: any[];
+    enable_nested_fields?: boolean;
+  };
+  failBuildOnDocumentIndexingError?: boolean; // Mặc định: true
 };
 ```
 
 ### Lập chỉ mục bằng DocSearch Scraper
 
-Dưới đây là mẫu cấu hình cho docsearch:
+[`typesense-docsearch-scraper`](https://github.com/typesense/typesense-docsearch-scraper) là một trình crawler truy cập vào trang tài liệu đang hoạt động của bạn, trích xuất nội dung và tải dữ liệu đó lên Typesense.
+Cách tiếp cận này yêu cầu một pipeline tự động hóa (ví dụ: GitHub Actions). Dưới đây là một mẫu cấu hình cho DocSearch Scraper:
 
 ```json
 // docsearch.config.json

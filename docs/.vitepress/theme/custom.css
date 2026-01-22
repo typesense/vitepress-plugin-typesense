@@ -1,3 +1,25 @@
+:root {
+  --vp-c-brand-1: #353fd7;
+  --vp-c-brand-2: #28309f;
+  --vp-c-brand-soft: #cbcef7;
+  --vp-button-brand-text: #000;
+  --vp-button-brand-bg: #bfff57;
+  --vp-button-brand-hover-text: #000;
+  --vp-button-brand-hover-bg: #8fbe43;
+  --vp-button-brand-active-bg: #bfff57;
+}
+
+.dark {
+  --vp-c-brand-1: #bfff57;
+  --vp-c-brand-2: #8fbe43;
+  --vp-c-brand-soft: #455c22;
+
+  --vp-button-brand-text: #fff;
+  --vp-button-brand-bg: #353fd7;
+  --vp-button-brand-hover-text: #fff;
+  --vp-button-brand-hover-bg: #28309f;
+  --vp-button-brand-active-bg: #353fd7;
+}
 [class*='DocSearch'] {
   /* Layout & Dimensions */
   --docsearch-actions-height: auto;

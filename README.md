@@ -4,6 +4,10 @@ A VitePress plugin that integrates Typesense with the DocSearch interface to add
 
 ![Plugin demo](assets/screenshot.png 'Plugin demo')
 
+## Getting Started
+
+Check out the [Getting Started Guide](https://vitepress-plugin.typesense.org/) to add Typesense search to your VitePress site quickly.
+
 ## About Typesense & VitePress
 
 [**Typesense**](https://typesense.org/) is an open-source, lightning-fast search engine that delivers instant, typo-tolerant results with minimal setup. It's an open source alternative to Algolia and an easier-to-use alternative to ElasticSearch.
@@ -21,10 +25,6 @@ To enable search, your documentation content must be indexed into Typesense. You
 
 - [**External Scraper:**](https://vitepress-plugin.typesense.org/configuration#index-using-docsearch-scraper)
   You can use the official [`typesense-docsearch-scraper`](https://github.com/typesense/typesense-docsearch-scraper). This is a crawler that visits your live documentation, extracts content (titles, headings, paragraphs), and pushes it to Typesense. This approach requires an automation pipeline (e.g., GitHub Actions).
-
-## Getting Started
-
-Check out the [Getting Started Guide](https://vitepress-plugin.typesense.org/) to add Typesense search to your VitePress site quickly.
 
 ## License
 

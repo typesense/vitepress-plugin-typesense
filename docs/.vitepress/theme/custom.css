@@ -44,3 +44,13 @@
   --docsearch-key-shadow: none;
   --docsearch-footer-shadow: 0 -1px 0 0 var(--vp-c-divider);
 }
+
+@media screen and (min-width: 960px) {
+  .VPImage.image-src {
+    max-width: 380px !important;
+    max-height: none !important;
+    height: auto !important;
+    width: 380px !important;
+    transform: translate(-35%, -47.5%) !important;
+  }
+}

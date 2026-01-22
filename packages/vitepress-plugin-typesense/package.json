@@ -15,14 +15,10 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
-    },
-    "./Search.vue": "./Search.vue",
-    "./SearchButton.vue": "./SearchButton.vue"
+    }
   },
   "files": [
-    "dist",
-    "Search.vue",
-    "SearchButton.vue"
+    "dist"
   ],
   "scripts": {
     "build": "vite build && cp Search.vue SearchButton.vue dist/",

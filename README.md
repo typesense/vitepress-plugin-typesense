@@ -16,10 +16,10 @@ Together, **Typesense**, **VitePress** and [**DocSearch**](https://github.com/ty
 
 To enable search, your documentation content must be indexed into Typesense. You can choose between two methods:
 
-- **Built-in Indexing (Recommended):**
+- [**Built-in Indexing (Recommended):**](https://vitepress-plugin.typesense.org/configuration#built-in-indexing)
   The plugin automatically scans your generated HTML files and indexes them into Typesense whenever you run `vitepress build`. This is the easiest setup as it requires no external tools.
 
-- **External Scraper:**
+- [**External Scraper:**](https://vitepress-plugin.typesense.org/configuration#index-using-docsearch-scraper)
   You can use the official [`typesense-docsearch-scraper`](https://github.com/typesense/typesense-docsearch-scraper). This is a crawler that visits your live documentation, extracts content (titles, headings, paragraphs), and pushes it to Typesense. This approach requires an automation pipeline (e.g., GitHub Actions).
 
 ## Getting Started

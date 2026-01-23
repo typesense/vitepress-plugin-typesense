@@ -6,7 +6,7 @@
   "version": "0.0.1",
   "private": true,
   "engines": {
-    "node": "^20.3.0 || >=21.0.0"
+    "node": ">=21.0.0"
   },
   "scripts": {
     "docs:dev": "vitepress dev docs",
@@ -25,7 +25,7 @@
   "workspaces": [
     "packages/*"
   ],
-  "homepage": "https://vitepress-plugin-typesense.vercel.app/",
+  "homepage": "https://vitepress-plugin.typesense.org/",
   "repository": {
     "type": "git",
     "url": "https://github.com/typesense/vitepress-plugin-typesense.git"

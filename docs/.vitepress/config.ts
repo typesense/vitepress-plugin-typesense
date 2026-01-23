@@ -10,6 +10,8 @@ export default defineConfig({
   description:
     'A VitePress plugin that integrates Typesense with the DocSearch interface to add lightning-fast, typo-tolerant search to your VitePress documentation site.',
   head: [['link', { rel: 'icon', href: '/favicon.png' }]],
+  cleanUrls: true,
+
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     socialLinks: [
@@ -62,7 +64,6 @@ export default defineConfig({
       },
     },
   },
-  cleanUrls: true,
   vite: {
     plugins: [
       TypesenseSearchPlugin({

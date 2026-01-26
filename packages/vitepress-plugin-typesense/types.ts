@@ -1,3 +1,4 @@
+import type { CollectionCreateSchema } from "typesense/lib/Typesense/Collections";
 export interface Hierarchy {
   [key: string]: string | null | undefined;
   lvl0: string | null;
@@ -32,8 +33,8 @@ export interface DocSearchRecord {
 }
 
 export interface CustomSettings {
-  token_separators?: string[];
-  symbols_to_index?: string[];
-  field_definitions?: any[];
-  enable_nested_fields?: boolean;
+  token_separators?: CollectionCreateSchema['token_separators'];
+  symbols_to_index?: CollectionCreateSchema['symbols_to_index'];
+  field_definitions?: CollectionCreateSchema['fields'];
+  enable_nested_fields?: CollectionCreateSchema['enable_nested_fields'];
 }

@@ -79,7 +79,7 @@ type IndexingConfig = {
   customCollectionSettings?: {
     token_separators?: string[];
     symbols_to_index?: string[];
-    field_definitions?: any[];
+    field_definitions?: CollectionFieldSchema[];
     enable_nested_fields?: boolean;
   };
   failBuildOnDocumentIndexingError?: boolean; // Mặc định: true

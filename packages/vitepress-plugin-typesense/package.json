@@ -3,11 +3,11 @@
   "description": "A VitePress plugin that adds Typesense DocSearch for fast, typo-tolerant documentation search.",
   "author": "typesense",
   "type": "module",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "publishConfig": {
     "access": "public"
   },
-  "license": "MIT",
+  "license": "Apache-2.0",
   "keywords": [
     "typesense",
     "search",

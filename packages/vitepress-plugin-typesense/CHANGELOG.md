@@ -1,5 +1,11 @@
 # vitepress-plugin-typesense
 
+## 1.1.5
+
+### Patch Changes
+
+- change license to apache 2.0
+
 ## 1.1.4
 
 ### Patch Changes

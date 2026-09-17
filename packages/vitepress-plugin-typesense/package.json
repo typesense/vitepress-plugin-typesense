@@ -31,7 +31,8 @@
     "dist"
   ],
   "scripts": {
-    "build": "vite build && cp Search.vue SearchButton.vue dist/",
+    "watch": "vite build --watch",
+    "build": "vite build",
     "prepublishOnly": "bun run build"
   },
   "devDependencies": {
@@ -46,8 +47,8 @@
     "cheerio": "^1.1.2",
     "gray-matter": "^4.0.3",
     "typesense": "^2.1.0",
-    "typesense-docsearch-css": "^0.4.1",
-    "typesense-docsearch.js": "^3.4.1"
+    "typesense-docsearch-css": "5.0.2-0",
+    "typesense-docsearch.js": "5.0.2-0"
   },
   "homepage": "https://vitepress-plugin.typesense.org/",
   "repository": {

@@ -38,10 +38,7 @@ const initializeDocSearch = async (
   currentLang: string,
   autoOpen: boolean = true,
 ) => {
-  const docsearch = (await import(
-    // @ts-ignore
-    'typesense-docsearch.js/dist/umd'
-  )) as typeof import('typesense-docsearch.js');
+  const docsearch = await import('typesense-docsearch.js');
   const { locales, ...rest }: DocSearchClientConfig = config();
   rest.typesenseSearchParameters ||= {};
 
@@ -139,24 +136,14 @@ watch(
   }
 }
 
-.DocSearch-LoadingIndicator {
-  display: none !important;
-}
-
-/* Show the loading indicator only when the search is stalled/loading */
-.DocSearch-Container--Stalled .DocSearch-LoadingIndicator {
-  display: flex !important;
-}
-
-/* Hide the Magnifier icon when loading to prevent overlapping */
-.DocSearch-Container--Stalled .DocSearch-MagnifierLabel {
-  display: none !important;
-}
-
 .DocSearch-Button {
   padding: 2px 12px !important;
   border: none !important;
   border-radius: 8px !important;
+}
+
+:not(.dark) .DocSearch-Button {
+  background-color: var(--vp-c-bg-alt, #f6f6f7);
 }
 
 .DocSearch-Button .DocSearch-Search-Icon {
@@ -189,6 +176,9 @@ watch(
   color: var(--docsearch-key-color);
 }
 
+:not(.dark) .DocSearch-Button-Keys {
+  border-color: var(--vp-c-divider, #e2e2e3);
+}
 .DocSearch-Commands-Key {
   background: none !important;
   border: 1px solid var(--docsearch-subtle-color) !important;
@@ -206,10 +196,6 @@ watch(
 
 .mac .DocSearch-Button-Keys:after {
   content: '\2318  K';
-}
-.DocSearch-Logo a {
-  display: flex;
-  align-items: center;
 }
 
 .DocSearch-Help a {

@@ -29,7 +29,7 @@ export default () =>
     typesenseSearchParameters: {},
 
     getMissingResultsUrl({ query }) {
-      return `https://github.com/typesense/typesense-docsearch.js/issues/new?title=${query}`;
+      return `https://github.com/typesense/vitepress-plugin-typesense/issues/new?title=${query}`;
     },
 
     locales: {

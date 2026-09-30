@@ -8,13 +8,15 @@ import path from 'node:path';
 export default defineConfig({
   build: {
     lib: {
-      entry: resolve(__dirname, 'index.ts'),
+      entry: resolve(import.meta.dirname, 'index.ts'),
       name: 'VitePressPluginTypesense',
       fileName: 'index',
       formats: ['es', 'cjs'],
     },
     rollupOptions: {
+      platform: 'node',
       external: [
+        'node:module',
         'vite',
         'vitepress',
         'typesense-docsearch.js',

@@ -117,13 +117,7 @@ export function TypesenseSearchPlugin(options: TypesensePluginConfig): Plugin {
     },
 
     config() {
-      // Logic to find the current directory in both ESM and CJS
-      let dir = '';
-      if (typeof __dirname !== 'undefined') {
-        dir = __dirname;
-      } else {
-        dir = path.dirname(fileURLToPath(import.meta.url));
-      }
+      const dir = path.dirname(fileURLToPath(import.meta.url));
 
       return {
         resolve: {

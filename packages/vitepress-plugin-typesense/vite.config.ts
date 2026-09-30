@@ -30,9 +30,9 @@ export default defineConfig({
     },
     sourcemap: true,
     emptyOutDir: true,
-    watch: {
-      exclude: ['dist/**', 'public/**', 'node_modules/**'],
-    },
+    watch: process.argv.includes('--watch')
+      ? { exclude: ['dist/**', 'public/**', 'node_modules/**'] }
+      : undefined,
   },
   plugins: [
     dts({ rollupTypes: true }),

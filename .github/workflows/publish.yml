@@ -39,3 +39,4 @@ jobs:
 
       - name: Stage package for npm
         run: npm publish --provenance
+        working-directory: packages/vitepress-plugin-typesense

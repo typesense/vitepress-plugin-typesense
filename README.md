@@ -2,7 +2,7 @@
 
 A VitePress plugin that integrates Typesense with the DocSearch interface to add lightning-fast, typo-tolerant search to your VitePress documentation site.
 
-![Plugin demo](assets/docsearch-v5-screenshot.png 'Plugin demo')
+![Plugin demo](assets/docsearch-v5-screenshot.png?v2 'Plugin demo')
 
 ## Getting Started
 

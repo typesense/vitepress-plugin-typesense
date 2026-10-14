@@ -35,7 +35,7 @@ jobs:
         run: bun run typecheck
 
       - name: Build package
-        run: bun run build
+        run: bun run plugin:build
 
       - name: Stage package for npm
         run: npm publish --provenance

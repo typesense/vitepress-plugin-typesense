@@ -1,5 +1,11 @@
 # vitepress-plugin-typesense
 
+## 2.0.0
+
+### Major Changes
+
+- Update Typesense Docsearch to v5
+
 ## 1.1.5
 
 ### Patch Changes

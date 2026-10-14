@@ -47,8 +47,8 @@
     "cheerio": "^1.1.2",
     "gray-matter": "^4.0.3",
     "typesense": "^2.1.0",
-    "typesense-docsearch-css": "5.0.2-0",
-    "typesense-docsearch.js": "5.0.2-0"
+    "typesense-docsearch-css": "5.0.2-3",
+    "typesense-docsearch.js": "5.0.2-3"
   },
   "homepage": "https://vitepress-plugin.typesense.org/",
   "repository": {

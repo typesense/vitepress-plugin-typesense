@@ -14,7 +14,8 @@
     "docs:preview": "vitepress preview docs",
     "plugin:watch": "cd packages/vitepress-plugin-typesense && bun watch",
     "plugin:build": "cd packages/vitepress-plugin-typesense && bun run build",
-    "plugin:publish": "cd packages/vitepress-plugin-typesense && npm publish"
+    "plugin:publish": "cd packages/vitepress-plugin-typesense && npm publish",
+    "typecheck": "cd packages/vitepress-plugin-typesense && tsc --noEmit"
   },
   "dependencies": {
     "vitepress-plugin-typesense": "workspace:*"
